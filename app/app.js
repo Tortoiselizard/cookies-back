@@ -15,4 +15,8 @@ app.get('/cookie', async (req, res) => {
     res.status(200).send('Acabas de solicitar una cookie')
 })
 
+app.get('/noCookie', async(req,res) => {
+    res.status(200).send('Esta es una ruta libre de cookies')
+})
+
 module.exports = app
