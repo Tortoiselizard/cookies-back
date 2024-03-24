@@ -15,6 +15,7 @@ app.use(cors({
 app.use(morgan('dev'))
 
 app.get('/', async (req, res) => {
+    console.log('getHeader:', res.getHeader('Access-Control-Allow-Origin'))
     res.status(200).json('Esto es una api para las cookies!')
 })
 
