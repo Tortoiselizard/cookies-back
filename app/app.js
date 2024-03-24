@@ -15,7 +15,7 @@ app.get('/', async (req, res) => {
 })
 
 app.get('/cookie', async (req, res) => {
-    const cookie = "myCookie=galleta"
+    const cookie = "myCookie=galleta; SameSite=None; Secure"
     res.setHeader('Set-Cookie', cookie)
     res.status(200).json('Acabas de solicitar una cookie')
 })
