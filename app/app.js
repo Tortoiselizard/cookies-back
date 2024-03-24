@@ -3,7 +3,7 @@ const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 
-const { PATH_FRONT, PATH_FRONT2 } = process.env
+const { PATH_FRONT, DOMINE } = process.env
 // console.log('PATH_FRONT:', PATH_FRONT)
 
 const app = express()
@@ -28,7 +28,8 @@ app.get('/', async (req, res) => {
 })
 
 app.get('/cookie', async (req, res) => {
-    const cookie = "myCookie=galleta; SameSite=None; Secure; Path=/"
+    const cookie = `myCookie=galleta; SameSite=None; Secure; Path=/; Domain=${DOMINE}`
+    console.log('cookie:', cookie)
     res.setHeader('Set-Cookie', cookie)
     res.status(200).json('Acabas de solicitar una cookie')
 })
