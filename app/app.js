@@ -1,11 +1,14 @@
+require('dotenv').config({ path: '.env.local'})
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 
+const { PATH_FRONT } = process.env
+
 const app = express()
 
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: `${PATH_FRONT}`,
     credentials: true
 }))
 app.use(morgan('dev'))
