@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const cors = require('cors')
 
 const { PATH_FRONT } = process.env
+console.log('PATH_FRONT:', PATH_FRONT)
 
 const app = express()
 
