@@ -4,18 +4,26 @@ const morgan = require('morgan')
 const cors = require('cors')
 
 const { PATH_FRONT, PATH_FRONT2 } = process.env
-console.log('PATH_FRONT:', PATH_FRONT)
+// console.log('PATH_FRONT:', PATH_FRONT)
 
 const app = express()
 
-app.use(cors({
-    origin: [ `${PATH_FRONT2}` , `${PATH_FRONT}`],
-    credentials: true
-}))
+// app.use(cors({
+//     origin: [ `${PATH_FRONT2}` , `${PATH_FRONT}`],
+//     credentials: true
+// }))
+app.use((req, res, next) => {
+    console.log('getHeader:', res.getHeader('Access-Control-Allow-Origin'))
+    res.setHeader('Access-Control-Allow-Origin', `${PATH_FRONT}`)
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
+    res.setHeader('Access-Control-Allow-Credentials', true)
+    console.log('getHeader:', res.getHeader('Access-Control-Allow-Origin'))
+    next()
+})
 app.use(morgan('dev'))
 
 app.get('/', async (req, res) => {
-    console.log('getHeader:', res.getHeader('Access-Control-Allow-Origin'))
     res.status(200).json('Esto es una api para las cookies!')
 })
 
