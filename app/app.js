@@ -37,7 +37,10 @@ app.get('/cookie', async (req, res) => {
 })
 
 app.get('/noCookie', async(req,res) => {
-    res.status(200).json('Esta es una ruta libre de cookies')
+    const cookie = `myCookie=; SameSite=None; Secure; Max-Age=0`
+    console.log('cookie:', cookie)
+    res.setHeader('Set-Cookie', cookie)
+    res.status(200).json('Se eliminará tu cookie')
 })
 
 module.exports = app
