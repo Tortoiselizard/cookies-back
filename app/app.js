@@ -3,13 +3,13 @@ const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 
-const { PATH_FRONT } = process.env
+const { PATH_FRONT, PATH_FRONT2 } = process.env
 console.log('PATH_FRONT:', PATH_FRONT)
 
 const app = express()
 
 app.use(cors({
-    origin: `${PATH_FRONT}`,
+    origin: [ `${PATH_FRONT2}` , `${PATH_FRONT}`],
     credentials: true
 }))
 app.use(morgan('dev'))
