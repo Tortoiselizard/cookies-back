@@ -13,7 +13,9 @@ const app = express()
 //     credentials: true
 // }))
 app.use((req, res, next) => {
-    console.log('cookie:', req.headers.cookie)
+    const cookie = req.headers.cookie
+    console.log('cookie:', cookie)
+    req.myCookie = cookie
     next()
 })
 app.use((req, res, next) => {
@@ -26,7 +28,9 @@ app.use((req, res, next) => {
 app.use(morgan('dev'))
 
 app.get('/', async (req, res) => {
-    res.status(200).json('Esto es una api para las cookies!')
+    const myCookie = req.myCookie
+    console.log('myCookie:', myCookie)
+    res.status(200).json(`Esto es una api para las cookies! La cookie que me llego es: ${myCookie}`)
 })
 
 app.get('/simulateAuth', async (req, res) => {
@@ -36,7 +40,9 @@ app.get('/simulateAuth', async (req, res) => {
 
 app.get('/redirectionToC', async (req, res) => {
     console.log('encontre el valor de user')
-    res.setHeader('Set-Cookie', 'token=1234')
+    const cookie = `myCookie=galleta de simulacion; SameSite=None; Secure`
+    console.log('cookie:', cookie)
+    res.setHeader('Set-Cookie', cookie)
     res.redirect(`${PATH_FRONT}`)
 })
 
