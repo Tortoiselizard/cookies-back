@@ -29,6 +29,17 @@ app.get('/', async (req, res) => {
     res.status(200).json('Esto es una api para las cookies!')
 })
 
+app.get('/simulateAuth', async (req, res) => {
+    console.log('haciendo la redirección al servior de google')
+    res.redirect(`${PATH_BACK}/redirectionToC`)
+})
+
+app.get('/redirectionToC', async (req, res) => {
+    console.log('encontre el valor de user')
+    res.setHeader('Set-Cookie', 'token=1234')
+    res.redirect(`${PATH_FRONT}`)
+})
+
 app.get('/redirectionToA', async (req, res) => {
     console.log('pasando por la redirección A')
     // res.status(200).json('Estas en la redirección A!')
