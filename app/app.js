@@ -54,6 +54,9 @@ app.get('/redirectionToA', async (req, res) => {
 
 app.get('/redirectionToB', async (req, res) => {
     console.log('pasando por la redirección B')
+    const cookie = `myCookie=galleta de redireccion; SameSite=None; Secure`
+    console.log('cookie:', cookie)
+    res.setHeader('Set-Cookie', cookie)
     res.status(200).json('Estas en una redirección B!')
 })
 
