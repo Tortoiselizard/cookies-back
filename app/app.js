@@ -7,7 +7,7 @@ const { PATH_FRONT, PATH_BACK } = process.env
 console.log('PATH_FRONT:', PATH_FRONT)
 
 const app = express()
-
+app.use(express.json())
 // app.use(cors({
 //     origin: [ `${PATH_FRONT2}` , `${PATH_FRONT}`],
 //     credentials: true
@@ -77,6 +77,15 @@ app.get('/noCookie', async(req,res) => {
 app.post('/addCustomHeader', async (req, res) => {
     res.setHeader('galleta', 'galleta de poder')
     res.status(200).json('Ya agregué una cookie a mi página')
+})
+
+app.post('/cookie-back', async (req, res) => {
+    const { cookie } = req.body
+    console.log('body:', req.body)
+    console.log('cookie proveniente del front:', cookie)
+    res.setHeader('Set-Cookie', cookie)
+    // res.status(200).json('Desde el back, estoy mandando la cookie que me pasaste del front')
+    res.status(200).json('ya agregué la cookie en el header de esta respuesta')
 })
 
 module.exports = app
